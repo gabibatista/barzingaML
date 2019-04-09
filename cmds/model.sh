@@ -1,0 +1,1 @@
+python modelo.py
