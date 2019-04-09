@@ -8,7 +8,7 @@ from keras.layers import Dense, Activation, Dropout, Conv2D, MaxPooling2D, Flatt
 # Carregando Dados
 
 np.random.seed(100)
-df = pd.read_csv('dataset.csv', header=None)
+df = pd.read_csv('data/dataset.csv', header=None)
 
 df.loc[df[7500] == 'oreo', 7500] = 0
 df.loc[df[7500] == 'sensacao', 7500] = 1
@@ -82,4 +82,4 @@ print ('\nTempo gasto: %s segundos' % str(time() - start))
 y_prediction = model.predict_classes(X_test)
 print ("\nAcurácia", np.sum(y_prediction == y_test) / float(len(y_test)))
 
-model.save('barzinga_model.h5')
+model.save('data/barzinga_model.h5')
