@@ -28,16 +28,3 @@ sudo update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 10
 
 git clone https://github.com/gabibatista/barzingaML.git
 ```
-
-Add these alias to the **top** of your bashrc:
-
-```bash
-alias python=python3
-alias pip=pip3
-```
-
-And then:
-
-```bash
-source ~/.bashrc
-```
