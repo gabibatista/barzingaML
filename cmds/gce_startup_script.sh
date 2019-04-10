@@ -38,14 +38,12 @@ cd /opt/app
 cat >/etc/supervisor/conf.d/python-app.conf << EOF
 [program:pythonapp]
 directory=/opt/app
-command=/opt/app/env/bin/honcho start -f ./procfile barzinga-ml
+command=/opt/app/env/bin/honcho start -f ./procfile web
 autostart=true
 autorestart=true
 user=pythonapp
-# Environment variables ensure that the application runs inside of the
-# configured virtualenv.
-environment=VIRTUAL_ENV="/opt/app/env",PATH="/opt/app/env/bin",\
-    HOME="/home/pythonapp",USER="pythonapp"
+# environment variables ensure that the application runs inside of the configured virtualenv.
+environment=VIRTUAL_ENV="/opt/app/env",PATH="/opt/app/env/bin",HOME="/home/pythonapp",USER="pythonapp"
 stdout_logfile=syslog
 stderr_logfile=syslog
 EOF
@@ -53,4 +51,4 @@ EOF
 supervisorctl reread
 supervisorctl update
 
-# Application should now be running under supervisor
+# Application should now be running under supervisor!
