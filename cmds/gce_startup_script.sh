@@ -38,7 +38,7 @@ cd /opt/app
 cat >/etc/supervisor/conf.d/python-app.conf << EOF
 [program:pythonapp]
 directory=/opt/app
-command=/opt/app/env/bin/honcho start -f ./procfile worker bookshelf
+command=/opt/app/env/bin/honcho start -f ./procfile barzinga-ml
 autostart=true
 autorestart=true
 user=pythonapp
