@@ -20,8 +20,8 @@ Then, you must create the H5 file with the network; run
 
 ```bash
 sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get install vim git python3-pip
+sudo apt-get -y upgrade
+sudo apt-get -y install vim git python3-pip
 
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 sudo update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 10
