@@ -21,7 +21,7 @@ pip install --upgrade pip virtualenv
 
 # git requires $HOME and it's not set during the startup script
 export HOME=/root
-git clone https://github.com/gabibatista/barzingaML.git /opt/app
+sudo git clone https://github.com/gabibatista/barzingaML.git /opt/app
 
 # Install app dependencies
 virtualenv -p python3 /opt/app/env
@@ -30,6 +30,9 @@ source /opt/app/env/bin/activate
 
 # Make sure the pythonapp user owns the application code
 chown -R pythonapp:pythonapp /opt/app
+
+cd /opt/app
+./cmds/model.sh
 
 # Configure supervisor to start gunicorn inside of our virtualenv and run the application
 cat >/etc/supervisor/conf.d/python-app.conf << EOF
