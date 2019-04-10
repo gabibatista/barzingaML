@@ -9,7 +9,7 @@ service google-fluentd restart &
 
 # Install dependencies from apt
 apt-get update
-apt-get install -yq vim git build-essential supervisor python python-dev python-pip libffi-dev libssl-dev
+apt-get install -yq vim git build-essential supervisor python python-dev python-pip libffi-dev libssl-dev authbind
 
 # Create a pythonapp user. The application will run as this user
 useradd -m -d /home/pythonapp pythonapp
@@ -34,11 +34,16 @@ chown -R pythonapp:pythonapp /opt/app
 cd /opt/app
 ./cmds/model.sh
 
+# allow running on 80 with authbind
+sudo touch /etc/authbind/byport/80
+sudo chmod 777 /etc/authbind/byport/80
+sudo chown pythonapp:pythonapp /etc/authbind/byport/80
+
 # Configure supervisor to start gunicorn inside of our virtualenv and run the application
 cat >/etc/supervisor/conf.d/python-app.conf << EOF
 [program:pythonapp]
 directory=/opt/app
-command=/opt/app/env/bin/honcho start -f ./procfile web
+command=authbind --deep /opt/app/env/bin/honcho start -f ./procfile web
 autostart=true
 autorestart=true
 user=pythonapp
