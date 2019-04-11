@@ -30,6 +30,5 @@ gcloud compute instances create barzinga-ml \
     --machine-type=g1-small \
     --scopes userinfo-email,cloud-platform \
     --metadata-from-file startup-script=cmds/gce_startup_script.sh \
-    --tags http-server \
-    --tags https-server \
+    --tags http-server,https-server \
     --network-interface address=$ip
