@@ -17,6 +17,16 @@ def predict():
   img_rows, img_cols = 50, 150
   data = np.fromstring(request.data, dtype=int, sep=',')
   test = np.array([data])
+
+  a = []
+  for i in range(0, 2500):
+      a.append(.2126)
+      a.append(.7152)
+      a.append(.0722)
+  a = np.array(a)
+
+  test = (test.values / 255) * a
+
   test = test.reshape(test.shape[0], img_rows, img_cols, 1)
   classes = model.predict_classes(test)
   return str(classes)
