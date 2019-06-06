@@ -1,22 +1,25 @@
 #!/bin/bash -xe
 
+UPDATE_IP=false
 REGION=us-central1
 ZONE=$REGION-c
 PROJECT=barzinganow
 
-gcloud compute addresses delete barzinga-ml-ip -q \
-    --project=$PROJECT \
-    --region=$REGION || true
+if [ "$UPDATE_IP" = true ]; then
+    gcloud compute addresses delete barzinga-ml-ip -q \
+        --project=$PROJECT \
+        --region=$REGION || true
 
-gcloud compute addresses create barzinga-ml-ip \
-    --project=$PROJECT \
-    --region=$REGION \
-    --description="An IP for the barzinga-ml backend service." \
-    --network-tier=PREMIUM
+    gcloud compute addresses create barzinga-ml-ip \
+        --project=$PROJECT \
+        --region=$REGION \
+        --description="An IP for the barzinga-ml backend service." \
+        --network-tier=PREMIUM
+fi
 
 ip=`gcloud compute addresses describe barzinga-ml-ip --region $REGION | grep 'address:' | perl -pe 's/address: ([\d.]*)$/$1/'`
 
-echo "Will use ip address: $ip"
+echo "We will be using the following ip address: $ip"
 
 gcloud compute instances delete barzinga-ml -q \
     --project=$PROJECT \

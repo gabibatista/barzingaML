@@ -11,8 +11,8 @@ service google-fluentd restart &
 apt-get update
 apt-get install -yq vim git build-essential supervisor python python-dev python-pip libffi-dev libssl-dev authbind
 
-# Create a pythonapp user. The application will run as this user
-useradd -m -d /home/pythonapp pythonapp
+# Create a pythonapp user if doesnt exist. The application will run as this user
+id -u pythonapp &>/dev/null || useradd -m -d /home/pythonapp pythonapp
 
 # pip from apt is out of date, so make it update itself and install virtualenv
 pip install --upgrade pip virtualenv
@@ -32,7 +32,7 @@ source /opt/app/env/bin/activate
 chown -R pythonapp:pythonapp /opt/app
 
 cd /opt/app
-./cmds/model.sh
+# ./cmds/model.sh # the model is in the repository
 
 # allow running on 80 with authbind
 sudo touch /etc/authbind/byport/80
@@ -48,7 +48,7 @@ autostart=true
 autorestart=true
 user=pythonapp
 # environment variables ensure that the application runs inside of the configured virtualenv.
-environment=VIRTUAL_ENV="/opt/app/env",PATH="/opt/app/env/bin",HOME="/home/pythonapp",USER="pythonapp"
+environment=VIRTUAL_ENV="/opt/app/env",PATH="/opt/app/env/bin",HOME="/opt/app",USER="pythonapp"
 stdout_logfile=syslog
 stderr_logfile=syslog
 EOF
