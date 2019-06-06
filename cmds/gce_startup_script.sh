@@ -48,7 +48,7 @@ autostart=true
 autorestart=true
 user=pythonapp
 # environment variables ensure that the application runs inside of the configured virtualenv.
-environment=VIRTUAL_ENV="/opt/app/env",PATH="/opt/app/env/bin",HOME="/home/pythonapp",USER="pythonapp"
+environment=VIRTUAL_ENV="/opt/app/env",PATH="/opt/app/env/bin",HOME="/opt/app",USER="pythonapp"
 stdout_logfile=syslog
 stderr_logfile=syslog
 EOF
