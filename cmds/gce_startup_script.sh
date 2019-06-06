@@ -11,8 +11,8 @@ service google-fluentd restart &
 apt-get update
 apt-get install -yq vim git build-essential supervisor python python-dev python-pip libffi-dev libssl-dev authbind
 
-# Create a pythonapp user. The application will run as this user
-useradd -m -d /home/pythonapp pythonapp
+# Create a pythonapp user if doesnt exist. The application will run as this user
+id -u pythonapp &>/dev/null || useradd -m -d /home/pythonapp pythonapp
 
 # pip from apt is out of date, so make it update itself and install virtualenv
 pip install --upgrade pip virtualenv
