@@ -2,7 +2,7 @@
 import pandas as pd
 import json
 
-df = pd.read_json('data/barzinga_all_products.json')
+df = pd.read_json('data/barzinga_labeled_products.json')
 df.count()
 
 products = []

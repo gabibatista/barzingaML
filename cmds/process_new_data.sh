@@ -1,1 +1,1 @@
-python products_data_processing.py
+python ../products_data_processing.py
