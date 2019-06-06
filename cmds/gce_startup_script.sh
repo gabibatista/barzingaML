@@ -32,7 +32,7 @@ source /opt/app/env/bin/activate
 chown -R pythonapp:pythonapp /opt/app
 
 cd /opt/app
-./cmds/model.sh
+# ./cmds/model.sh
 
 # allow running on 80 with authbind
 sudo touch /etc/authbind/byport/80
