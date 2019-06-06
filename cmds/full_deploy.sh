@@ -19,7 +19,7 @@ fi
 
 ip=`gcloud compute addresses describe barzinga-ml-ip --region $REGION | grep 'address:' | perl -pe 's/address: ([\d.]*)$/$1/'`
 
-echo "Will use ip address: $ip"
+echo "We will be using the following ip address: $ip"
 
 gcloud compute instances delete barzinga-ml -q \
     --project=$PROJECT \
