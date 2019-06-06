@@ -18,6 +18,7 @@ def hello():
 
 @app.route("/predict", methods=['POST'])
 def predict():
+  print('Received request: data %s...' % (request.data[0:10]))
   img_rows, img_cols = 50, 150
   data = np.fromstring(request.data, dtype=int, sep=',')
   test = np.array([data])
@@ -33,11 +34,15 @@ def predict():
 
   test = test.reshape(test.shape[0], img_rows, img_cols, 1)
   label = model.predict_classes(test)[0]
+  print('Predicted label %s' % label)
+
   items = list(filter(lambda product: product["label"] == label, productsDict))
   if len(items) > 0:
-    return items[0]["id"]
+    product_id = items[0]["id"]
+    print('Returning product_id %s' % product_id)
+    return product_id
 
-  return Response("Server error", status=500)
+  return Response("Server Error: no product found with label %s" % label, status=500)
 
 if __name__ == "__main__":
-  app.run()
+  app.run(host = '0.0.0.0')
