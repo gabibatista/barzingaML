@@ -28,7 +28,6 @@ for i in range(0, 2500):
     a.append(.0722)
 
 a = np.array(a)
-type(a)
 
 X_train = (df_train.iloc[:, :-1].values / 255) * a
 X_test = (df_test.iloc[:, :-1].values / 255) * a
@@ -103,3 +102,5 @@ print ('\nTempo gasto: %s segundos' % str(time() - start))
 y_prediction = model.predict_classes(X_test)
 print ("\nAcurácia", np.sum(y_prediction == y_test) / float(len(y_test)))
 
+from keras.models import load_model
+model.save('data/barzinga_model.h5')

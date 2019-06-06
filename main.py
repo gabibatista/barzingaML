@@ -2,7 +2,7 @@ from flask import Flask, request
 import numpy as np
 from keras.models import load_model
 
-version='1.0'
+version='1.1'
 app = Flask(__name__)
 
 model = load_model('data/barzinga_model.h5')
