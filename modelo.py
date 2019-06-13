@@ -9,10 +9,9 @@ import numpy as np
 np.random.seed(100)
 df = pd.read_csv('data/dataset.csv', header=None)
 
-df.loc[df[7500] == 'oreo', 7500] = 0
-df.loc[df[7500] == 'sensacao', 7500] = 1
-df.loc[df[7500] == 'duo', 7500] = 2
-df.loc[df[7500] == 'trident', 7500] = 2
+
+# ##Shuffling 
+df = df.sample(frac=1)
 
 
 # ## Split de Dados
@@ -88,7 +87,7 @@ model.add(Activation('relu'))
 
 model.add(Dropout(0.3))
 
-model.add(Dense(3))
+model.add(Dense(90))
 
 model.add(Activation('softmax'))
 
